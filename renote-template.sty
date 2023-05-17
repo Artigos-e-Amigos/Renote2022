@@ -1,0 +1,157 @@
+% LaTeX definitions for Renote Journal 2020 style
+%
+% Created by Tadeu Classe, August 14 2020
+% updated march 2005
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{renote-template}[2020/08/14]
+
+% margem sup 3.5 cm: h? 1,5 cm para header, + 2 cm para top
+% margem inf 2.5 cm: h? 1,5 cm para foot, + 1 cm para bottom
+% margem esq/dir 3 cm
+\RequirePackage[a4paper,top=3.0cm,left=3cm,right=3cm,bottom=2.0cm]{geometry}
+
+\parindent 1.27cm
+\parskip   0pt
+
+\flushbottom
+
+% captions
+\RequirePackage[footnotesize,indent]{caption2}
+\setlength{\captionmargin}{0.8cm}
+\renewcommand{\captionfont}{\footnotesize}
+\renewcommand{\captionlabeldelim}{.}
+
+% font
+\RequirePackage{times}
+
+\renewcommand{\normalsize}{\@setfontsize\normalsize\@xiipt\@xivpt}
+\newcommand{\XIIIPT}{\@setfontsize\xiiipt{12}{17}}
+\newcommand{\XVIPT}{\@setfontsize\xvipt{12}{20}}
+
+% new commands
+\newcounter{instn}
+\setcounter{instn}{1}
+\newcommand{\instnum}{\arabic{instn}}
+\newcommand{\inst}[1]{\ensuremath{^{#1}}}
+\newcommand{\nextinstitute}{\\\mbox{}\\[-6pt] \addtocounter{instn}{1}\inst{\instnum}}
+\newcommand{\email}[1]{\\\mbox{}\\[-6pt]\footnotesize\texttt{#1}}
+\renewcommand{\and}{, }
+
+% itens
+\setlength\leftmargini   {1.27cm}
+\setlength\leftmargin    {\leftmargini}
+\setlength\leftmarginii  {\leftmargini}
+\setlength\leftmarginiii {\leftmargini}
+\setlength\leftmarginiv  {\leftmargini}
+\setlength  \labelsep    {.5em}
+\setlength  \labelwidth  {\leftmargini}
+\addtolength\labelwidth  {-\labelsep}
+\def\@listI{\leftmargin\leftmargini
+            \parsep 0\p@ \@plus1\p@ \@minus\p@
+            \topsep 0\p@ \@plus2\p@ \@minus4\p@
+            \itemsep0\p@}
+\let\@listi\@listI
+\@listi
+\def\@listii {\leftmargin\leftmarginii
+              \labelwidth\leftmarginii
+              \advance\labelwidth-\labelsep
+              \topsep    0\p@ \@plus2\p@ \@minus\p@}
+\def\@listiii{\leftmargin\leftmarginiii
+              \labelwidth\leftmarginiii
+              \advance\labelwidth-\labelsep
+              \topsep    0\p@ \@plus\p@\@minus\p@
+              \parsep    \z@
+              \partopsep \p@ \@plus\z@ \@minus\p@}
+
+
+% sections
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+                       {10\p@ \@plus -4\p@ \@minus -4\p@}%
+                       {0\p@ \@plus 4\p@ \@minus 4\p@}%
+                       {\normalfont\XIIIPT\bfseries\boldmath
+                        \rightskip=\z@ \@plus 8em\pretolerance=10000 }}
+
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                       {10\p@ \@plus -4\p@ \@minus -4\p@}%
+                       {0\p@ \@plus 4\p@ \@minus 4\p@}%
+                       {\normalfont\normalsize\bfseries\boldmath
+                        \rightskip=\z@ \@plus 8em\pretolerance=10000 }}
+
+%\renewcommand{\thesection}{\arabic{section}.}
+%\renewcommand{\thesubsection}{\thesection\arabic{subsection}.}
+%\renewcommand{\thesubsubsection}{\thesubsection\arabic{subsubsection}.}
+
+\RequirePackage{titlesec}
+\titlelabel{\thetitle.\hspace{1ex}}
+
+% first page
+\pagestyle{empty}
+
+\newcommand{\authortag}[1]{$^{#1}$}
+
+\def\@maketitle{\newpage
+ %\null % isso dava um espaco extra antes do title
+ \begin{center}
+   %\vglue -6pt
+%   \vspace*{12pt}
+\vspace*{-.7cm}
+  {\XVIPT\bf\@title\par}
+   \vglue 6pt plus 3pt minus 3pt
+  {\normalsize
+   \begin{tabular}[t]{c}\@author\end{tabular}\par}
+   \vglue 6pt plus 3pt minus 3pt
+  {}\par
+}
+\let\maketitleOLD\maketitle
+\renewcommand{\maketitle}{\maketitleOLD\thispagestyle{empty}}
+
+\renewenvironment{abstract}{%
+      \list{}{\advance\topsep by6pt\relax%\small
+      \leftmargin=0.0cm
+      \labelwidth=\z@
+      \listparindent=\z@
+      \itemindent\listparindent
+      \rightmargin\leftmargin}\item[\hskip\labelsep
+                                    \bfseries Abstract:]}%
+      {\endlist}
+
+\newenvironment{resumo}{%
+      \list{}{\advance\topsep by6pt\relax%\small
+      \leftmargin=0.0cm
+      \labelwidth=\z@
+      \listparindent=\z@
+      \itemindent\listparindent
+      \rightmargin\leftmargin}\item[\hskip\labelsep
+                                    \bfseries Resumo:]}%
+      {\endlist}
+      
+\newenvironment{palavas-chave}{%
+      \list{}{\advance\topsep by6pt\relax%\small
+      \leftmargin=0.0cm
+      \labelwidth=\z@
+      \listparindent=\z@
+      \itemindent\listparindent
+      \rightmargin\leftmargin}\item[\hskip\labelsep
+                                    \bfseries Palavras-chave:]}%
+      {\endlist}
+      
+\newenvironment{keywords}{%
+      \list{}{\advance\topsep by6pt\relax%\small
+      \leftmargin=0.0cm
+      \labelwidth=\z@
+      \listparindent=\z@
+      \itemindent\listparindent
+      \rightmargin\leftmargin}\item[\hskip\labelsep
+                                    \bfseries Keywords:]}%
+      {\endlist}
+
+\newenvironment{englishtitle}{%
+      \list{}{}
+      \centering
+      \item[]\bfseries}%
+      {\endlist}
+  
+\RequirePackage{fancyhdr}      
+\fancyhf{} % sets both header and footer to nothing
+\renewcommand{\headrulewidth}{0pt}
